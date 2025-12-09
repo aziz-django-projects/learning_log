@@ -1,0 +1,6 @@
+{% extends "learning_logs/base.html" %} {% block content %}
+<form action="{% url 'register' %}" method="post">
+  {% csrf_token %} {{ form }}
+  <button name="submit">Register</button>
+</form>
+{% endblock content %}
