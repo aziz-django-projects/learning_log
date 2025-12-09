@@ -1,0 +1,8 @@
+{% extends "learning_logs/base.html" %} {% block content %}
+<p>Delete topic "{{ topic.text }}"?</p>
+<form action="{% url 'delete_topic' topic.id %}" method="post">
+  {% csrf_token %}
+  <button type="submit">Confirm delete</button>
+</form>
+<p><a href="{% url 'topic' topic.id %}">Cancel</a></p>
+{% endblock content %}

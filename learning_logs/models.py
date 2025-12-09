@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Topic(models.Model):
     text = models.CharField(max_length=200)
@@ -6,6 +7,9 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.text
+    
+    def get_absolute_url(self):
+        return reverse("topics")
 
 class Entry(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
