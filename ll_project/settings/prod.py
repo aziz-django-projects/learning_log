@@ -1,24 +1,29 @@
 import os
 
+import dj_database_url
+
 from .base import *
 
 if not os.environ.get("DJANGO_SECRET_KEY"):
     raise RuntimeError("DJANGO_SECRET_KEY is required when using ll_project.settings.prod")
 
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
+DJANGO_SETTINGS_MODULE=os.environ["DJANGO_SETTINGS_MODULE"]
 DEBUG = env_bool("DJANGO_DEBUG", default=False)
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", default=[])
+
+# Static files (prod)
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+}
 
 # Database (prod)
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'learning_log'),
-        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
-        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
-        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
-    }
+    "default": dj_database_url.config(
+        default=None,
+        conn_max_age=600,
+        ssl_require=True,
+    )
 }
-
