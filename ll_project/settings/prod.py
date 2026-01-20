@@ -11,6 +11,9 @@ SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 DJANGO_SETTINGS_MODULE=os.environ["DJANGO_SETTINGS_MODULE"]
 DEBUG = env_bool("DJANGO_DEBUG", default=False)
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", default=[])
+CSRF_TRUSTED_ORIGINS = [
+    "https://learninglog-production-9525.up.railway.app",
+]
 
 # Static files (prod)
 STORAGES = {
