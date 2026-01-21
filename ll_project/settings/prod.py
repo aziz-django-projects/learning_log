@@ -11,6 +11,9 @@ SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 DJANGO_SETTINGS_MODULE=os.environ["DJANGO_SETTINGS_MODULE"]
 DEBUG = env_bool("DJANGO_DEBUG", default=False)
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", default=[])
+CSRF_TRUSTED_ORIGINS = [
+    "https://learninglog-production-9525.up.railway.app",
+]
 
 # Static files (prod)
 STORAGES = {
@@ -22,7 +25,7 @@ STORAGES = {
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
+        default=None,
         conn_max_age=600,
         ssl_require=True,
     )
