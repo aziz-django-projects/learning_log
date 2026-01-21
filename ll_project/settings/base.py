@@ -1,9 +1,3 @@
-"""
-Base Django settings for ll_project.
-
-Split from the original single-file settings module.
-"""
-
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -36,15 +30,7 @@ if env_specific.exists():
 elif fallback.exists():
     load_dotenv(dotenv_path=fallback, override=False)
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
-ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", default=[])
-
-
 # Application definition
-
 INSTALLED_APPS = [
     # My Apps
     "learning_logs",
