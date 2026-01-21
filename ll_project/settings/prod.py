@@ -24,8 +24,8 @@ STORAGES = {
 # Database (prod)
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 DATABASES = {
-    "default": dj_database_url.config(
-        default=None,
+    "default": dj_database_url.parse(
+        os.getenv("DATABASE_URL"),
         conn_max_age=600,
         ssl_require=True,
     )
